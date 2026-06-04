@@ -8,6 +8,7 @@ A minimal, three-notebook quickstart for the [HiddenLayer Python SDK](https://gi
 |----------|---------|-------|
 | [`01-model-scanner/scan.ipynb`](./01-model-scanner/scan.ipynb) | **Supply Chain Protection** | Scan a local model file and a HuggingFace community model |
 | [`02-runtime-protection/interactions.ipynb`](./02-runtime-protection/interactions.ipynb) | **Runtime Protection (AIDR)** | Analyze LLM interactions for prompt injection, PII, code, DoS, and refusals |
+| [`02-runtime-protection/request_response_evaluations.ipynb`](./02-runtime-protection/request_response_evaluations.ipynb) | **Runtime Protection (v2)** | Evaluate raw OpenAI request/response payloads inline with the v2 pass-through API |
 | [`03-red-team/red_team_eval.ipynb`](./03-red-team/red_team_eval.ipynb) | **AI Attack Simulation** | Run a red team evaluation against an OpenAI target |
 
 ## Quick Start
