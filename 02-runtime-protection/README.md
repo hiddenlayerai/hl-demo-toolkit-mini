@@ -6,21 +6,20 @@ AIDR (AI Detection & Response) analyzes LLM interactions in real time and detect
 
 Complete the [top-level setup](../README.md#quick-start) (venv, `pip install`, `.env`) before running this notebook.
 
-## Notebook
+## Notebooks
 
 | Notebook | Description |
 |----------|-------------|
 | [`interactions.ipynb`](./interactions.ipynb) | Static `interactions.analyze()` calls demonstrating each detection type |
+| [`request_response_evaluations.ipynb`](./request_response_evaluations.ipynb) | v2 pass-through API — evaluate raw OpenAI request/response payloads inline |
 
-The notebook does **not** instrument a live agent — it calls `analyze()` with hardcoded input/output pairs so the SDK response is the focus. For agent-instrumentation patterns (input/output gates, per-tool-call scanning, MCP), see the full POV toolkit.
+Neither notebook instruments a live agent — they call the SDK with hardcoded payloads so the response is the focus.
 
-## SDK Method Used
+## SDK Methods Used
+
+### Interactions API (v1)
 
 ```python
-import hiddenlayer
-
-client = hiddenlayer.HiddenLayer(client_id="...", client_secret="...")
-
 response = client.interactions.analyze(
     hl_project_id="Default Project",
     metadata={"model": "gpt-4o", "requester_id": "user-1", "provider": "openai"},
@@ -28,6 +27,22 @@ response = client.interactions.analyze(
     output={"messages": [{"role": "assistant", "content": "Hi there!"}]},
 )
 ```
+
+Uses HiddenLayer's own format (`metadata`, `input`, `output`). The action is in the response body (`evaluation.action`).
+
+### Request & Response Evaluations (v2)
+
+```python
+raw = client.runtime.with_raw_response.evaluate_request(
+    body={"model": "gpt-4o", "messages": [{"role": "user", "content": "Hello"}]},
+    hl_project_id="Default Project",
+    extra_headers={"HL-Roundtrip-Id": "<uuid>", "HL-Runtime-Session-Id": "<session>"},
+)
+action = raw.headers.get("HL-Runtime-Action", "ALLOW")
+payload = raw.json()
+```
+
+Uses the **native OpenAI/Anthropic payload** as the body. The action is on the `HL-Runtime-Action` response **header**. Use `with_raw_response` to access both headers and body. Pass `HL-Roundtrip-Id` to link a request eval to its response eval, and `HL-Runtime-Session-Id` to group multiple round-trips.
 
 The `hl_project_id` parameter maps to the `HL-Project-Id` header and controls which ruleset/policy governs detection. Without it, detections may not be evaluated.
 

@@ -2,10 +2,11 @@
 
 ## Project Overview
 
-`hl-demo-toolkit-mini` is a minimal three-notebook quickstart for the HiddenLayer Python SDK. Each notebook shows the smallest useful call for one product:
+`hl-demo-toolkit-mini` is a minimal quickstart for the HiddenLayer Python SDK. Each notebook shows the smallest useful call for one product:
 
 - `01-model-scanner/scan.ipynb` — Supply Chain Protection
-- `02-runtime-protection/interactions.ipynb` — Runtime Protection (AIDR)
+- `02-runtime-protection/interactions.ipynb` — Runtime Protection (AIDR, v1 interactions)
+- `02-runtime-protection/request_response_evaluations.ipynb` — Runtime Protection (v2 pass-through)
 - `03-red-team/red_team_eval.ipynb` — AI Attack Simulation
 
 The goal is "what does this SDK call return?" — not realistic agent integration. There is intentionally no shared package, no agent loop, no MCP server, no banking simulation.
@@ -48,7 +49,7 @@ client.model_scanner.scan_file(model_name, model_path, model_version, wait_for_r
 client.community_scanner.community_scan(model_name, model_path, model_source)
 ```
 
-### Runtime Protection (AIDR)
+### Runtime Protection (AIDR) — v1 Interactions
 ```python
 client.interactions.analyze(
     hl_project_id="Default Project",
@@ -56,6 +57,17 @@ client.interactions.analyze(
     input={"messages": [{"role": "user", "content": "..."}]},
     output={"messages": [{"role": "assistant", "content": "..."}]},
 )
+```
+
+### Runtime Protection — v2 Request & Response Evaluations
+```python
+raw = client.runtime.with_raw_response.evaluate_request(
+    body={"model": "gpt-4o", "messages": [...]},
+    hl_project_id="Default Project",
+    extra_headers={"HL-Roundtrip-Id": "<uuid>", "HL-Runtime-Session-Id": "<session>"},
+)
+action = raw.headers.get("HL-Runtime-Action", "ALLOW")
+payload = raw.json()
 ```
 
 ### AI Attack Simulation (Red Team)
