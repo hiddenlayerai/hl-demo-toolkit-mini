@@ -14,6 +14,19 @@ Complete the [top-level setup](../README.md#quick-start) (venv, `pip install`, `
 
 The target in this notebook is a bare `openai.AsyncOpenAI` chat call — no tools, no agent loop. The point is to show the smallest possible handler that satisfies the red team API contract.
 
+## Integrations
+
+The [`integrations/`](./integrations) folder adapts the same red team flow to other target types by swapping the `handler`:
+
+| Notebook | Target |
+|----------|--------|
+| [`integrations/http_api.ipynb`](./integrations/http_api.ipynb) | A custom LLM app/agent behind an HTTP/REST endpoint |
+| [`integrations/playwright.ipynb`](./integrations/playwright.ipynb) | A web chat UI driven via Playwright browser automation |
+| [`integrations/static_prompts.ipynb`](./integrations/static_prompts.ipynb) | A target tested with a pre-written static prompt set |
+| [`integrations/template.ipynb`](./integrations/template.ipynb) | Generic skeleton — drop in any target |
+
+See [`integrations/README.md`](./integrations/README.md) for setup details.
+
 ## How It Works
 
 1. You define a `handler(prompt, history, session_id, target_system_prompt)` function that takes an attack prompt and returns the target's response.

@@ -11,6 +11,17 @@ A minimal, three-notebook quickstart for the [HiddenLayer Python SDK](https://gi
 | [`02-runtime-protection/request_response_evaluations.ipynb`](./02-runtime-protection/request_response_evaluations.ipynb) | **Runtime Protection (v2)** | Evaluate raw OpenAI request/response payloads inline with the v2 pass-through API |
 | [`03-red-team/red_team_eval.ipynb`](./03-red-team/red_team_eval.ipynb) | **AI Attack Simulation** | Run a red team evaluation against an OpenAI target |
 
+## Red Team Integrations
+
+The [`03-red-team/integrations/`](./03-red-team/integrations) folder shows how to run red team evaluations against other kinds of targets by swapping the `handler`:
+
+| Notebook | Target |
+|----------|--------|
+| [`03-red-team/integrations/http_api.ipynb`](./03-red-team/integrations/http_api.ipynb) | A custom LLM app/agent behind an HTTP/REST endpoint |
+| [`03-red-team/integrations/playwright.ipynb`](./03-red-team/integrations/playwright.ipynb) | A web chat UI driven via Playwright browser automation |
+| [`03-red-team/integrations/static_prompts.ipynb`](./03-red-team/integrations/static_prompts.ipynb) | A target tested with a pre-written static prompt set |
+| [`03-red-team/integrations/template.ipynb`](./03-red-team/integrations/template.ipynb) | Generic skeleton — drop in any target |
+
 ## Quick Start
 
 ```bash
