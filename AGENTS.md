@@ -7,7 +7,7 @@
 - `01-model-scanner/scan.ipynb` — Supply Chain Protection
 - `02-runtime-protection/interactions.ipynb` — Runtime Protection (AIDR, v1 interactions)
 - `02-runtime-protection/request_response_evaluations.ipynb` — Runtime Protection (v2 pass-through)
-- `03-red-team/red_team_eval.ipynb` — AI Attack Simulation
+- `03-red-team/red_team_openai.ipynb` — AI Attack Simulation (plus `red_team_*.ipynb` variants for other target types)
 
 The goal is "what does this SDK call return?" — not realistic agent integration. There is intentionally no shared package, no agent loop, no MCP server, no banking simulation.
 
@@ -18,7 +18,7 @@ The goal is "what does this SDK call return?" — not realistic agent integratio
 - **SDK repo:** https://github.com/hiddenlayerai/hiddenlayer-sdk-python
 - **SDK API reference:** https://github.com/hiddenlayerai/hiddenlayer-sdk-python/blob/main/api.md
 - **Format:** Jupyter notebooks (`.ipynb`)
-- **Dependencies:** Single top-level `requirements.txt` — `hiddenlayer-sdk`, `python-dotenv`, `openai`
+- **Dependencies:** Single top-level `requirements.txt` — `hiddenlayer-sdk`, `python-dotenv`, `openai`, `aiohttp`
 
 ## SDK Authentication
 

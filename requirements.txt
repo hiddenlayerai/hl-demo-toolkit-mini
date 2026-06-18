@@ -1,3 +1,4 @@
 hiddenlayer-sdk
 python-dotenv
 openai
+aiohttp

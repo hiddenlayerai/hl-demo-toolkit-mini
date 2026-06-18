@@ -9,18 +9,21 @@ A minimal, three-notebook quickstart for the [HiddenLayer Python SDK](https://gi
 | [`01-model-scanner/scan.ipynb`](./01-model-scanner/scan.ipynb) | **Supply Chain Protection** | Scan a local model file and a HuggingFace community model |
 | [`02-runtime-protection/interactions.ipynb`](./02-runtime-protection/interactions.ipynb) | **Runtime Protection (AIDR)** | Analyze LLM interactions for prompt injection, PII, code, DoS, and refusals |
 | [`02-runtime-protection/request_response_evaluations.ipynb`](./02-runtime-protection/request_response_evaluations.ipynb) | **Runtime Protection (v2)** | Evaluate raw OpenAI request/response payloads inline with the v2 pass-through API |
-| [`03-red-team/red_team_eval.ipynb`](./03-red-team/red_team_eval.ipynb) | **AI Attack Simulation** | Run a red team evaluation against an OpenAI target |
+| [`03-red-team/red_team_openai.ipynb`](./03-red-team/red_team_openai.ipynb) | **AI Attack Simulation** | Run a red team evaluation against an OpenAI target |
 
 ## Red Team Integrations
 
-The [`03-red-team/integrations/`](./03-red-team/integrations) folder shows how to run red team evaluations against other kinds of targets by swapping the `handler`:
+The [`03-red-team/`](./03-red-team) folder runs red team evaluations against different kinds of targets by swapping the `handler`:
 
 | Notebook | Target |
 |----------|--------|
-| [`03-red-team/integrations/http_api.ipynb`](./03-red-team/integrations/http_api.ipynb) | A custom LLM app/agent behind an HTTP/REST endpoint |
-| [`03-red-team/integrations/playwright.ipynb`](./03-red-team/integrations/playwright.ipynb) | A web chat UI driven via Playwright browser automation |
-| [`03-red-team/integrations/static_prompts.ipynb`](./03-red-team/integrations/static_prompts.ipynb) | A target tested with a pre-written static prompt set |
-| [`03-red-team/integrations/template.ipynb`](./03-red-team/integrations/template.ipynb) | Generic skeleton — drop in any target |
+| [`03-red-team/red_team_openai.ipynb`](./03-red-team/red_team_openai.ipynb) | An OpenAI Chat Completions model |
+| [`03-red-team/red_team_http_api.ipynb`](./03-red-team/red_team_http_api.ipynb) | A custom LLM app/agent behind an HTTP/REST endpoint |
+| [`03-red-team/red_team_static_prompts.ipynb`](./03-red-team/red_team_static_prompts.ipynb) | A target tested with a pre-written static prompt set |
+| [`03-red-team/red_team_playwright.ipynb`](./03-red-team/red_team_playwright.ipynb) | A web chat UI driven via Playwright browser automation |
+| [`03-red-team/red_team_webhook.ipynb`](./03-red-team/red_team_webhook.ipynb) | A target that replies asynchronously via webhook callback |
+| [`03-red-team/red_team_websocket.ipynb`](./03-red-team/red_team_websocket.ipynb) | A target reached over a persistent WebSocket connection |
+| [`03-red-team/red_team_template.ipynb`](./03-red-team/red_team_template.ipynb) | Generic skeleton — drop in any target |
 
 ## Quick Start
 
