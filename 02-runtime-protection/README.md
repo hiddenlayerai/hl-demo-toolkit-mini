@@ -8,14 +8,29 @@ Complete the [top-level setup](../README.md#quick-start) (venv, `pip install`, `
 
 ## Notebooks
 
-| Notebook | Description |
-|----------|-------------|
-| [`interactions.ipynb`](./interactions.ipynb) | Static `interactions.analyze()` calls demonstrating each detection type |
-| [`request_response_evaluations.ipynb`](./request_response_evaluations.ipynb) | v2 pass-through API — evaluate raw OpenAI request/response payloads inline |
+> **⚠️ These notebooks demonstrate two *different* runtime APIs — not two ways of calling the same one.** They use different SDK methods, different request formats, and return the enforcement action in different places. They are **not interchangeable**; pick the one that matches how you intend to integrate.
+
+| Notebook | API version | Description |
+|----------|-------------|-------------|
+| [`interactions.ipynb`](./interactions.ipynb) | **v1 — Interactions** | Static `client.interactions.analyze()` calls; input + output sent together in HiddenLayer's own schema; action returned in the response **body** (`evaluation.action`) |
+| [`request_response_evaluations.ipynb`](./request_response_evaluations.ipynb) | **v2 — Request/Response (pass-through)** | `client.runtime.evaluate_request()` / `evaluate_response()`; native OpenAI/Anthropic payloads scanned pre- and post-LLM; action returned on the `HL-Runtime-Action` response **header** |
 
 Neither notebook instruments a live agent — they call the SDK with hardcoded payloads so the response is the focus.
 
+### v1 vs v2 at a glance
+
+| | v1 — Interactions | v2 — Request/Response |
+|---|---|---|
+| SDK method | `client.interactions.analyze()` | `client.runtime.evaluate_request()` / `evaluate_response()` |
+| Payload format | HiddenLayer schema (`metadata` / `input` / `output`) | Native OpenAI/Anthropic request & response |
+| Calls per turn | One (input + output together) | Two (before **and** after the LLM) |
+| Where the action is returned | Response **body** (`evaluation.action`) | Response **header** (`HL-Runtime-Action`) |
+| Correlation across calls | n/a | `HL-Roundtrip-Id` (links request↔response) + `HL-Runtime-Session-Id` (groups turns) |
+| Minimum SDK | any recent | `hiddenlayer-sdk>=3.6.0` |
+
 ## SDK Methods Used
+
+The two sections below are **distinct APIs with distinct SDK entry points** (`client.interactions` vs. `client.runtime`), not two options on one endpoint. Note the different request shapes and where each returns its action.
 
 ### Interactions API (v1)
 
