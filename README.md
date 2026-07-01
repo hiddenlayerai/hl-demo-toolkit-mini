@@ -7,9 +7,11 @@ A minimal, three-notebook quickstart for the [HiddenLayer Python SDK](https://gi
 | Notebook | Product | Shows |
 |----------|---------|-------|
 | [`01-model-scanner/scan.ipynb`](./01-model-scanner/scan.ipynb) | **Supply Chain Protection** | Scan a local model file and a HuggingFace community model |
-| [`02-runtime-protection/interactions.ipynb`](./02-runtime-protection/interactions.ipynb) | **Runtime Protection (AIDR)** | Analyze LLM interactions for prompt injection, PII, code, DoS, and refusals |
-| [`02-runtime-protection/request_response_evaluations.ipynb`](./02-runtime-protection/request_response_evaluations.ipynb) | **Runtime Protection (v2)** | Evaluate raw OpenAI request/response payloads inline with the v2 pass-through API |
+| [`02-runtime-protection/interactions.ipynb`](./02-runtime-protection/interactions.ipynb) | **Runtime Protection (AIDR) — v1** | Interactions API: analyze input + output together via `client.interactions.analyze()`; action in the response **body** |
+| [`02-runtime-protection/request_response_evaluations.ipynb`](./02-runtime-protection/request_response_evaluations.ipynb) | **Runtime Protection (AIDR) — v2** | Request/Response pass-through API: scan raw OpenAI/Anthropic payloads via `client.runtime.evaluate_request()` / `evaluate_response()`; action on the `HL-Runtime-Action` **header** |
 | [`03-red-team/red_team_openai.ipynb`](./03-red-team/red_team_openai.ipynb) | **AI Attack Simulation** | Run a red team evaluation against an OpenAI target |
+
+> **⚠️ The two Runtime Protection notebooks use two *different* APIs — not two ways of calling the same one.** **v1 (Interactions)** and **v2 (Request/Response pass-through)** use different SDK methods (`client.interactions` vs. `client.runtime`), different request formats, and return the enforcement action in different places (response body vs. `HL-Runtime-Action` header). They are **not interchangeable** — see [`02-runtime-protection/README.md`](./02-runtime-protection/README.md#v1-vs-v2-at-a-glance) for a side-by-side comparison.
 
 ## Red Team Integrations
 
